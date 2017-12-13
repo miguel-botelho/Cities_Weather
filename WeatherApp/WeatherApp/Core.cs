@@ -23,6 +23,8 @@ namespace WeatherApp
             string queryString = "http://api.apixu.com/v1/history.json?key="
                 + key + "&q=" + country + "&dt=" + finalDay;
 
+            Debug.WriteLine(queryString);
+
             var results = await DataService.getDataFromService(queryString).ConfigureAwait(false);
             
             Debug.WriteLine(results);
@@ -41,6 +43,10 @@ namespace WeatherApp
                 weather.Sunset = (string)results["forecast"]["forecastday"][0]["astro"]["sunset"];
                 weather.Sunrise = (string)results["forecast"]["forecastday"][0]["astro"]["sunrise"];
 
+                foreach (var obj in results["forecast"]["forecastday"][0]["hour"])
+                {
+                    weather.Hours.Add((int)obj["temp_c"]);
+                }
 
                 return weather;
             }

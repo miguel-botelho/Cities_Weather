@@ -1,4 +1,7 @@
-﻿namespace WeatherApp
+﻿using System;
+using System.Collections.Generic;
+
+namespace WeatherApp
 {
     public class Weather
     {
@@ -13,6 +16,7 @@
         public string LastUpdated { get; set; }
         public string Sunset { get; set; }
         public string Sunrise { get; set; }
+        public IList<int> Hours { get; set; } 
 
         public Weather()
         {
@@ -27,6 +31,30 @@
             this.Visibility = " ";
             this.Precipitation = " ";
             this.LastUpdated = " ";
+            this.Hours = new List<int>();
+            this.Hours.Add(0);
+            this.Hours.Add(1);
+            this.Hours.Add(2);
+            this.Hours.Add(3);
+            this.Hours.Add(4);
+            this.Hours.Add(5);
+            this.Hours.Add(6);
+            this.Hours.Add(7);
+            this.Hours.Add(8);
+            this.Hours.Add(9);
+            this.Hours.Add(10);
+            this.Hours.Add(11);
+            this.Hours.Add(12);
+            this.Hours.Add(13);
+            this.Hours.Add(14);
+            this.Hours.Add(15);
+            this.Hours.Add(16);
+            this.Hours.Add(17);
+            this.Hours.Add(18);
+            this.Hours.Add(19);
+            this.Hours.Add(20);
+            this.Hours.Add(21);
+            this.Hours.Add(22);
         }
     }
 }

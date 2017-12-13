@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
        xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+       xmlns:views="clr-namespace:SkiaSharp.Views.Forms;assembly=SkiaSharp.Views.Forms"
        x:Class="WeatherApp.WeatherPage">
 
   <ContentPage.Resources>
@@ -21,6 +22,9 @@
       <Style x:Key="fieldView" TargetType="ContentView">
         <Setter Property="Padding" Value="10,0,0,0" />
       </Style>
+      <Style x:Key="canvasView" TargetType="ContentView">
+        <Setter Property="Padding" Value="10,0,0,0" />
+        </Style>
     </ResourceDictionary>
   </ContentPage.Resources>
 
@@ -40,18 +44,8 @@
             </DatePicker>
         </StackLayout>
           <StackLayout Padding="0,0,0,10" VerticalOptions="End">
-            <Button x:Name="getWeatherBtn" Text="Get Weather" WidthRequest="185" BorderWidth="1" >
+            <Button x:Name="getWeatherBtn" Text="Get Weather" WidthRequest="185" BorderWidth="1" BackgroundColor="Blue" TextColor="White">
               <!-- Set iOS colors; use defaults on other platforms -->
-              <Button.TextColor>
-                <OnPlatform x:TypeArguments="Color">
-                    <On Platform="iOS" Value="White" />
-                </OnPlatform>
-              </Button.TextColor>
-              <Button.BorderColor>
-                <OnPlatform x:TypeArguments="Color">
-                    <On Platform="iOS" Value="White" />
-                </OnPlatform>
-              </Button.BorderColor>
             </Button>
           </StackLayout>
         </StackLayout>
@@ -108,6 +102,11 @@
           <ContentView Style="{StaticResource fieldView}">
             <Label x:Name="lastupdatedlabel" Text="{Binding LastUpdated}"
                 Style="{StaticResource fieldStyle}" />
+          </ContentView>
+          <Label x:Name="graphiclabel" Text="Temperature Variation" Style="{StaticResource labelStyle}"/>
+          <ContentView Style="{StaticResource canvasView}" HeightRequest="125" WidthRequest="300">
+            <views:SKCanvasView x:Name="canvas" PaintSurface="OnCanvasViewPaintSurface">
+            </views:SKCanvasView>
           </ContentView>
         </StackLayout>
       </StackLayout>
