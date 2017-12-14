@@ -57,28 +57,61 @@ namespace WeatherApp
                 Color = SKColors.Red,
                 StrokeWidth = 5
             };
+
+            var pathStroke2 = new SKPaint
+            {
+                IsAntialias = true,
+                Style = SKPaintStyle.Stroke,
+                Color = SKColors.Red,
+                StrokeWidth = 2,
+                TextSize = 20
+            };
+
+            var pathStroke1 = new SKPaint
+            {
+                IsAntialias = true,
+                Style = SKPaintStyle.Stroke,
+                Color = SKColors.BlueViolet,
+                StrokeWidth = 5
+            };
             var path = new SKPath();
-            int i = 140;
+            int i = 80;
+            int k = 7;
+            for (int j = 0; j < 18; j++)
+            {
+                path.MoveTo(80, 450 - k * 15);
+                path.LineTo(80, 450 - (k + 1) * 15);
+                k++;
+                canvas.DrawPath(path, pathStroke);
+            }
+            path = new SKPath();
+            for (int j = 0; j < 24; j++)
+            {
+                path.MoveTo(i, 345);
+                path.LineTo(i + 30, 345);
+                i = i + 30;
+                canvas.DrawPath(path, pathStroke);
+            }
+
+            SKPoint[] temp = new SKPoint[] { new SKPoint(40, 345), new SKPoint(50, 345)};
+            canvas.DrawPositionedText("07", temp, pathStroke2);
+            temp = new SKPoint[] { new SKPoint(40, 210), new SKPoint(50, 210) };
+            canvas.DrawPositionedText("16", temp, pathStroke2);
+            temp = new SKPoint[] { new SKPoint(40, 75), new SKPoint(50, 75) };
+            canvas.DrawPositionedText("25", temp, pathStroke2);
+
+            path = new SKPath();
+            i = 80;
             if (w.Hours.Count != 0)
             {
-                canvas.Clear(Color.Green.ToSKColor());
                 for (int j = 0; j < w.Hours.Count - 1; j++)
                 {
-                    path.MoveTo(i, w.Hours[j] * 15);
-                    path.LineTo(i, w.Hours[j + 1] * 15);
-                    canvas.DrawPath(path, pathStroke);
-                }
-            }else
-            {
-                for (int j = 0; j < w.Hours.Count - 1; j++)
-                {
-                    path.MoveTo(i, w.Hours[j] * 15);
+                    path.MoveTo(i, 450 - w.Hours[j] * 15);
                     i = i + 30;
-                    path.LineTo(i, w.Hours[j + 1] * 15);
+                    path.LineTo(i, 450 - w.Hours[j + 1] * 15);
                 }
-
                 // draw the path
-                canvas.DrawPath(path, pathStroke);
+                canvas.DrawPath(path, pathStroke1);
             }
         }  
     }
